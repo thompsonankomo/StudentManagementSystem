@@ -5,10 +5,11 @@ namespace StudentManagementApp.Data
 {
     public class AppDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<Grade> Grades { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -17,6 +18,8 @@ namespace StudentManagementApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             // Seed data
             modelBuilder.Entity<User>().HasData(
                 new User { ID = 1, Username = "admin", Password = "admin", Role = "admin" },
