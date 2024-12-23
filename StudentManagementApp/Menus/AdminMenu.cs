@@ -14,6 +14,38 @@ namespace StudentManagementApp.Menus
             _db = db;
         }
 
+        public void ShowLogin()
+        {
+            Console.WriteLine("\n--- Login ---");
+            Console.Write("Enter username: ");
+            string username = Console.ReadLine();
+            Console.Write("Enter password: ");
+            string password = Console.ReadLine();
+
+            var user = _db.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+
+            if (user != null)
+            {
+                Console.WriteLine($"Welcome, {user.Role} {user.Username}!");
+                if (user.Role == "admin")
+                {
+                    Show();
+                }
+                else if (user.Role == "student")
+                {
+                    ShowStudentMenu();
+                }
+                else
+                {
+                    Console.WriteLine("Unknown role.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid username or password.");
+            }
+        }
+
         public void Show()
         {
             while (true)
@@ -57,6 +89,12 @@ namespace StudentManagementApp.Menus
             }
         }
 
+        private void ShowStudentMenu()
+        {
+            Console.WriteLine("\n--- Student Menu ---");
+            Console.WriteLine("This feature is under development.");
+        }
+
         private void AddStudent()
         {
             Console.Write("Enter Student Name: ");
@@ -84,7 +122,7 @@ namespace StudentManagementApp.Menus
             string username = Console.ReadLine();
             Console.Write("Enter password: ");
             string password = Console.ReadLine();
-            Console.Write("Enter role (admin/teacher/student): ");
+            Console.Write("Enter role (admin/student): ");
             string role = Console.ReadLine();
 
             var user = new User { Username = username, Password = password, Role = role };

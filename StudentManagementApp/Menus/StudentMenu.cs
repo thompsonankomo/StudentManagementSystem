@@ -22,9 +22,11 @@ namespace StudentManagementApp.Menus
             {
                 Console.WriteLine("\n--- Student Menu ---");
                 Console.WriteLine("1. View My Data");
-                Console.WriteLine("2. Submit Assignment");
-                Console.WriteLine("3. View Grades");
-                Console.WriteLine("4. Logout");
+                Console.WriteLine("2. Add My Data");
+                Console.WriteLine("3. Delete My Data");
+                Console.WriteLine("4. Submit Assignment");
+                Console.WriteLine("5. View Grades");
+                Console.WriteLine("6. Logout");
                 Console.Write("Choose an option: ");
 
                 switch (Console.ReadLine())
@@ -33,12 +35,18 @@ namespace StudentManagementApp.Menus
                         ViewMyData();
                         break;
                     case "2":
-                        SubmitAssignment();
+                        AddMyData();
                         break;
                     case "3":
-                        ViewGrades();
+                        DeleteMyData();
                         break;
                     case "4":
+                        SubmitAssignment();
+                        break;
+                    case "5":
+                        ViewGrades();
+                        break;
+                    case "6":
                         return;
                     default:
                         Console.WriteLine("Invalid option.");
@@ -59,6 +67,33 @@ namespace StudentManagementApp.Menus
             Console.WriteLine($"ID: {student.ID}, Name: {student.Name}");
             Console.WriteLine("Courses: " + string.Join(", ", student.Courses.Select(c => c.Name)));
             Console.WriteLine("Notifications: " + string.Join(", ", student.Notifications.Select(n => n.Message)));
+        }
+
+        private void AddMyData()
+        {
+            Console.Write("Enter Student Name: ");
+            string name = Console.ReadLine();
+
+            var student = new Student { Name = name };
+            _db.Students.Add(student);
+            _db.SaveChanges();
+
+            Console.WriteLine("Student added successfully.");
+        }
+
+        private void DeleteMyData()
+        {
+            var student = _db.Students.FirstOrDefault(s => s.Name == _user.Username);
+            if (student == null)
+            {
+                Console.WriteLine("No data found to delete.");
+                return;
+            }
+
+            _db.Students.Remove(student);
+            _db.SaveChanges();
+
+            Console.WriteLine("Student data deleted successfully.");
         }
 
         private void SubmitAssignment()
