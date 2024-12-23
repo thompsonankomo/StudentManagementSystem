@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thomp\\StudentAppThais\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj": {}
+    "C:\\Users\\thomp\\finare\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thomp\\StudentAppThais\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj": {
+    "C:\\Users\\thomp\\finare\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thomp\\StudentAppThais\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj",
+        "projectUniqueName": "C:\\Users\\thomp\\finare\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj",
         "projectName": "StudentManagementApp",
-        "projectPath": "C:\\Users\\thomp\\StudentAppThais\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj",
+        "projectPath": "C:\\Users\\thomp\\finare\\StudentManagementSystem\\StudentManagementApp\\StudentManagementApp.csproj",
         "packagesPath": "C:\\Users\\thomp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thomp\\StudentAppThais\\StudentManagementSystem\\StudentManagementApp\\obj\\",
+        "outputPath": "C:\\Users\\thomp\\finare\\StudentManagementSystem\\StudentManagementApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thomp\\AppData\\Roaming\\NuGet\\NuGet.Config",
