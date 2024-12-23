@@ -53,11 +53,15 @@ namespace StudentManagementApp.Menus
                 Console.WriteLine("\n--- Admin Menu ---");
                 Console.WriteLine("1. Add Student");
                 Console.WriteLine("2. View Students");
-                Console.WriteLine("3. Add User");
-                Console.WriteLine("4. View Users");
-                Console.WriteLine("5. Delete User");
-                Console.WriteLine("6. Update User");
-                Console.WriteLine("7. Logout");
+                Console.WriteLine("3. Search Student");
+                Console.WriteLine("4. Add Course");
+                Console.WriteLine("5. View Courses");
+                Console.WriteLine("6. Search Course");
+                Console.WriteLine("7. Add User");
+                Console.WriteLine("8. View Users");
+                Console.WriteLine("9. Delete User");
+                Console.WriteLine("10. Update User");
+                Console.WriteLine("11. Logout");
                 Console.Write("Choose an option: ");
 
                 switch (Console.ReadLine())
@@ -69,18 +73,30 @@ namespace StudentManagementApp.Menus
                         ViewStudents();
                         break;
                     case "3":
-                        AddUser();
+                        SearchStudent();
                         break;
                     case "4":
-                        ViewUsers();
+                        AddCourse();
                         break;
                     case "5":
-                        DeleteUser();
+                        ViewCourses();
                         break;
                     case "6":
-                        UpdateUser();
+                        SearchCourse();
                         break;
                     case "7":
+                        AddUser();
+                        break;
+                    case "8":
+                        ViewUsers();
+                        break;
+                    case "9":
+                        DeleteUser();
+                        break;
+                    case "10":
+                        UpdateUser();
+                        break;
+                    case "11":
                         return;
                     default:
                         Console.WriteLine("Invalid option.");
@@ -115,6 +131,78 @@ namespace StudentManagementApp.Menus
                 Console.WriteLine($"ID: {student.ID}, Name: {student.Name}");
             }
         }
+
+        
+       private void SearchStudent()
+{
+    Console.Write("Enter Student Name to search: ");
+    string searchName = Console.ReadLine();
+
+    // Use AsEnumerable() to switch to client-side evaluation for the Contains method
+    var students = _db.Students
+                      .AsEnumerable()  // Forces client-side evaluation
+                      .Where(s => s.Name.Contains(searchName, StringComparison.OrdinalIgnoreCase))
+                      .ToList();
+
+    if (students.Any())
+    {
+        Console.WriteLine("Students found:");
+        foreach (var student in students)
+        {
+            Console.WriteLine($"ID: {student.ID}, Name: {student.Name}");
+        }
+    }
+    else
+    {
+        Console.WriteLine("No students found with that name.");
+    }
+}
+
+        private void AddCourse()
+        {
+            Console.Write("Enter Course Name: ");
+            string courseName = Console.ReadLine();
+
+            var course = new Course { Name = courseName };
+            _db.Courses.Add(course);
+            _db.SaveChanges();
+
+            Console.WriteLine("Course added successfully.");
+        }
+
+        private void ViewCourses()
+        {
+            var courses = _db.Courses;
+            foreach (var course in courses)
+            {
+                Console.WriteLine($"ID: {course.ID}, Name: {course.Name}");
+            }
+        }
+
+      
+
+private void SearchCourse()
+{
+    Console.Write("Enter Course Name to search: ");
+    string searchCourse = Console.ReadLine();
+
+    var courses = _db.Courses
+                     .Where(c => c.Name.Contains(searchCourse, StringComparison.OrdinalIgnoreCase))
+                     .ToList(); // Force evaluation in memory
+
+    if (courses.Any())
+    {
+        Console.WriteLine("Courses found:");
+        foreach (var course in courses)
+        {
+            Console.WriteLine($"ID: {course.ID}, Name: {course.Name}");
+        }
+    }
+    else
+    {
+        Console.WriteLine("No courses found with that name.");
+    }
+}
 
         private void AddUser()
         {
